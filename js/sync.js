@@ -330,7 +330,6 @@ window.syncDetecteur = syncDetecteur;
 window.qualpackHeartbeat = qualpackHeartbeat;
 
 /* heartbeat au démarrage */
-qualpackHeartbeat();/* heartbeat au démarrage */
 setTimeout(() => {
   qualpackHeartbeat();
 }, 3000);
