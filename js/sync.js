@@ -232,6 +232,36 @@ async function postBatch(url, payload) {
 }
 
 /* ================================
+   HEARTBEAT SUPABASE
+   Évite la mise en pause du projet gratuit
+================================ */
+
+async function qualpackHeartbeat() {
+  if (!navigator.onLine) return false;
+
+  try {
+    const { url } = getSupabaseConfig();
+
+    const res = await fetch(`${url}/rest/v1/sites?select=site_id&limit=1`, {
+      method: 'GET',
+      headers: getSupabaseHeaders()
+    });
+
+    if (!res.ok) {
+      const txt = await res.text().catch(() => '');
+      console.warn('Heartbeat Supabase non OK:', res.status, txt);
+      return false;
+    }
+
+    console.log('Heartbeat Supabase OK');
+    return true;
+  } catch (err) {
+    console.warn('Heartbeat Supabase impossible:', err);
+    return false;
+  }
+}
+
+/* ================================
    SYNCHRONISATION PRINCIPALE
 ================================ */
 
@@ -297,3 +327,10 @@ async function syncDetecteur(record) {
 window.syncPending = syncPending;
 window.syncPesee = syncPesee;
 window.syncDetecteur = syncDetecteur;
+window.qualpackHeartbeat = qualpackHeartbeat;
+
+/* heartbeat au démarrage */
+qualpackHeartbeat();/* heartbeat au démarrage */
+setTimeout(() => {
+  qualpackHeartbeat();
+}, 3000);
