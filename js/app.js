@@ -4267,8 +4267,23 @@ function qpBlockExpiredTrial() {
     <div style="min-height:100vh;background:#0D1B2A;color:#E8EDF3;display:flex;align-items:center;justify-content:center;padding:24px;font-family:Arial,sans-serif;text-align:center;">
       <div style="max-width:520px;background:#132236;border:1px solid #1F3A55;border-radius:16px;padding:28px;">
         <h1 style="font-size:24px;margin:0 0 12px;color:#F07070;">Essai QualPack expiré</h1>
-        <p style="font-size:15px;line-height:1.5;margin:0 0 10px;">La période d'essai de 30 jours est terminée pour le site <strong>${QUALPACK_SITE_NAME}</strong>.</p>
-        <p style="font-size:14px;line-height:1.5;color:#7A8FA6;margin:0;">Merci de contacter votre administrateur QUALPACK pour prolonger ou activer votre accès.</p>
+
+        <p style="font-size:15px;line-height:1.5;margin:0 0 10px;">
+          La période d'essai de 30 jours est terminée pour le site
+          <strong>${QUALPACK_SITE_NAME}</strong>.
+        </p>
+
+        <p style="font-size:14px;line-height:1.5;color:#7A8FA6;margin:0 0 18px;">
+          Merci de contacter votre administrateur QUALPACK pour prolonger ou activer votre accès.
+        </p>
+
+        <button
+          type="button"
+          onclick="qpLogout()"
+          style="border:0;border-radius:10px;padding:12px 18px;background:#2E86DE;color:#FFFFFF;font-weight:700;cursor:pointer;"
+        >
+          Revenir à l’Espace client
+        </button>
       </div>
     </div>`;
 }
