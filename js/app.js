@@ -5083,7 +5083,7 @@ async function initCatalogue() {
    SERVICE WORKER
    ================================================================ */
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js?v=27-start')
+  navigator.serviceWorker.register('./sw.js?v=28-trial-fix-1')
     .then(() => console.log('SW enregistré v27-start'))
     .catch(e => console.warn('SW erreur', e));
 }
