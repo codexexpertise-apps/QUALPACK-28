@@ -536,9 +536,15 @@ async function loadFromDB() {
 }
 // Attendre que le DOM ET db.js soient prêts avant d'initialiser IndexedDB
 document.addEventListener('DOMContentLoaded', async () => {
-  if (!qpCheckTrialStatus()) return;
+  // Vérifier d’abord l’accès au site.
+  // Cela évite qu’un ancien essai local bloque l’Espace client.
   const accessOk = await qpEnsureSiteAccess();
   if (!accessOk) return;
+
+  // La limite de 30 jours ne concerne que les accès
+  // dont le mode_demo est réellement activé.
+  const accessSession = qpGetCurrentAccessSession();
+  if (accessSession?.mode_demo === true && !qpCheckTrialStatus()) return;
   resetCurrentSampleSizeFromDefault();
   refreshSampleSizeUI();
   refreshBalanceRefUI();
